@@ -3,27 +3,23 @@
 /***
  * @return {function}
  */
-function makeInfinityAdder() {
+function makeAdder() {
   let accumulator = 0;
-  let calledClear = false;
 
-  const infinityAdder = (value) => {
+  const adder = (value) => {
     if (value === undefined) {
-      if (calledClear) {
-        accumulator = 0;
-      }
+      const temp = accumulator;
 
-      calledClear = true;
+      accumulator = 0;
 
-      return accumulator;
+      return temp;
     }
     accumulator += value;
-    calledClear = false;
 
-    return infinityAdder;
+    return adder;
   };
 
-  return infinityAdder;
+  return adder;
 }
 
-module.exports = makeInfinityAdder;
+module.exports = makeAdder;
